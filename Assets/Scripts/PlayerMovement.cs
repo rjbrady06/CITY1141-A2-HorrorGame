@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Data;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -182,6 +181,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Turn gravity off while on slope
         rb.useGravity = !OnSlope();
+
     }
 
     private void SpeedControl()
@@ -198,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
         //Limiting speed on ground or in air
         else
         {
-            Vector3 flatVel = new Vector3(rb.velocity.x, rb.velocity.z);
+            Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
             //Limit Velocity
             if (flatVel.magnitude > moveSpeed)
