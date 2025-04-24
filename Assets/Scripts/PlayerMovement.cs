@@ -180,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Turn gravity off while on slope
-        rb.useGravity = !OnSlope();
+        
 
     }
 
