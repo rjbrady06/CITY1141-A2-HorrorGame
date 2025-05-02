@@ -179,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
 
-        //Turn gravity off while on slope
+        
         
 
     }
