@@ -17,7 +17,7 @@ public class StateManager : MonoBehaviour
     {
         if (currentState != null)
         {
-            currentState.StateStarted()
+            currentState.StateStarted();
         }
     }
     // Update is called once per frame
