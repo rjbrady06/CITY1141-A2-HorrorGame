@@ -46,9 +46,9 @@ public class Throwing : MonoBehaviour
         Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
 
         //Add force
-        Vector3 forceToAdd = cam.transform.forward * throwForce + transform.up * throwUpwardForce;
+        //Vector3 forceToAdd = cam.transform.forward * throwForce + transform.up * throwUpwardForce;
 
-        projectileRb.AddForce(forceToAdd, ForceMode.Impulse);
+        //projectileRb.AddForce(forceToAdd, ForceMode.Impulse);
 
         totalThrows--;
 
