@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
-public class Throwing : MonoBehaviour
+public class ThrowingTutorial : MonoBehaviour
 {
     [Header("References")]
     public Transform cam;
@@ -18,7 +17,7 @@ public class Throwing : MonoBehaviour
     [Header("Throwing")]
     public KeyCode throwKey = KeyCode.Mouse0;
     public float throwForce;
-    public float throwUpward;
+    public float throwUpwardForce;
 
     bool readyToThrow;
 
@@ -39,28 +38,35 @@ public class Throwing : MonoBehaviour
     {
         readyToThrow = false;
 
-        //Instantiate object to throw
+        // instantiate object to throw
         GameObject projectile = Instantiate(objectToThrow, attackPoint.position, cam.rotation);
 
-        //Get rigidbody component
+        // get rigidbody component
         Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
 
-        //Add force
-        //Vector3 forceToAdd = cam.transform.forward * throwForce + transform.up * throwUpwardForce;
+        // calculate direction
+        Vector3 forceDirection = cam.transform.forward;
 
-        //projectileRb.AddForce(forceToAdd, ForceMode.Impulse);
+        RaycastHit hit;
+
+        if (Physics.Raycast(cam.position, cam.forward, out hit, 500f))
+        {
+            forceDirection = (hit.point - attackPoint.position).normalized;
+        }
+
+        // add force
+        Vector3 forceToAdd = forceDirection * throwForce + transform.up * throwUpwardForce;
+
+        projectileRb.AddForce(forceToAdd, ForceMode.Impulse);
 
         totalThrows--;
 
-        //implement throwCooldown
+        // implement throwCooldown
         Invoke(nameof(ResetThrow), throwCooldown);
-
     }
 
     private void ResetThrow()
     {
         readyToThrow = true;
     }
-
-
 }

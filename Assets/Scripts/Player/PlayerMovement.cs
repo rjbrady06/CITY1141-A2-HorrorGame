@@ -7,9 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
-    public float walkSpeed;
-    public float sprintSpeed;
-
+    
     public float groundDrag;
 
     [Header("Jumping")]
@@ -17,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
+
+    [HideInInspector] public float walkSpeed;
+    [HideInInspector] public float sprintSpeed;
 
     [Header("Crouching")]
     public float crouchSpeed;
