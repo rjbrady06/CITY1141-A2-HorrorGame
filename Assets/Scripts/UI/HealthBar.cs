@@ -5,39 +5,53 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider healthSlider;
-    public Slider easeHealthSlider;
-    public float maxHealth = 100f;
-    public float health;
-    private  float lerpSpeed = 0.05f;
+    [SerializeField]
+    Image mainHealthBar, followHealthBar;
+
+    [SerializeField]
+    Color decreaseColour, increaseColour;
+
+    [SerializeField]
+    float maxHealth, currentHealth, followHealth, followSpeed = 2f;
+
+    [SerializeField]
+    float damage = 10;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        health = maxHealth;
+        currentHealth = maxHealth;
+        followHealth = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(healthSlider.value != health)
+        mainHealthBar.fillAmount = currentHealth / maxHealth;
+        followHealth = Mathf.Lerp(followHealth, currentHealth, Time.deltaTime * followSpeed);
+        followHealthBar.color = currentHealth > followHealth ? increaseColour : decreaseColour;
+        followHealthBar.transform.SetSiblingIndex(0);
+        followHealthBar.fillAmount = followHealth / maxHealth;
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            healthSlider.value = health;
+            ReduceHealth();
+        } 
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            IncreaseHealth();
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            takeDamage(10);
-        }
-
-        if (healthSlider.value != easeHealthSlider.value)
-        {
-            easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, health, lerpSpeed);
-        }
     }
 
-    void takeDamage(float damage)
+    void ReduceHealth()
     {
-        health -= damage;
+        currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);   
     }
+    void IncreaseHealth()
+    {
+        currentHealth = Mathf.Clamp(currentHealth + damage, 0, maxHealth);   
+    }
+    
+    
 }
