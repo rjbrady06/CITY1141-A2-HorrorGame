@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class MainMenu : MonoBehaviour
 {
-    public void Play(string levelName)
+    
+
+    public void Play()
     {
-        SceneManager.LoadScene(levelName);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Time.timeScale = 1f;
     }
 
-    public void Exit()
+    public void Quit()
     {
         Application.Quit();
+        Debug.Log("Player has quit the game");
     }
+
+
 }
