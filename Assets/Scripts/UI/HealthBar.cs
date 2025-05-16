@@ -33,7 +33,7 @@ public class HealthBar : MonoBehaviour
         followHealthBar.transform.SetSiblingIndex(0);
         followHealthBar.fillAmount = followHealth / maxHealth;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.H))
         {
             ReduceHealth();
         } 
